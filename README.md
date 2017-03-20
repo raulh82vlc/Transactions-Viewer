@@ -33,7 +33,7 @@ Finally, this information would be passed through the UI thread.
 - This code test uses a wide range of Material design widgets from the Design support library such as:
 - `AppBarLayout`, `CoordinatorLayout`, `Toolbar`, `RecyclerView` as well as Material theme styles.
 
-### Features
+### Features
 - For an easy UI test, on the first screen, a switcher has been hold at the toolbar, to switch between `datasource1` (the biggest) and the minimal `datasource2`
 - At the main screen a summary of products sorted alphabetically is shown, as well as the number of transactions per product as subtitle.
 - Once clicked an item, the transactions detail view of an item is shown, which shows all transactions amounts with the initial currency
@@ -43,7 +43,7 @@ as well as its corresponding amount on `GBP`. At this detail view, there is a to
 info, such as the SKU identifier per product, the kind of dataset to look at, etc.
 - There is a small amount of Unit test cases for the most critical parts: mainly the Graph logic, then repository as well as view interaction.
 
-### SDK support
+### SDK support
 Support SDKs from **15** to **23**
 
 # Disclosure - Libraries used
