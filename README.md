@@ -5,6 +5,9 @@ corresponding exchange rate to GBP.
 This project uses Material design with *Clean architecture* by means of *Model-View-Presenter (MVP)* with *Repository pattern*
 as well as `Dagger 2` for *Dependency Injection*, trying to respect *SOLID principles* as much as possible.
 
+### Screenshots
+![Screencast UX](./art/transactions_viewer.gif)
+
 ## Overview
 At this open-source project, it is decoupled between `android` and `domain` modules or high level layers.
 
@@ -58,6 +61,9 @@ Support SDKs from **15** to **23**
 - [The Repository pattern](https://msdn.microsoft.com/en-us/library/ff649690.aspx) by Microsoft
 - [Effective Android UI](https://github.com/pedrovgs/EffectiveAndroidUI) by Pedro Gomez
 - [Android Clean Architecture](https://github.com/android10/Android-CleanArchitecture) by Fernando Cejas
+
+### Contributions
+Please read first [CONTRIBUTING](./CONTRIBUTING.md)
 
 ## About the author
 **Raul Hernandez Lopez**,
