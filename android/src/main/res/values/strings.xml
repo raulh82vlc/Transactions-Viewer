@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright (C) 2017 Raul Hernandez Lopez @raulh82vlc
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">Transactions viewer</string>
+    <string name="main_screen">Products</string>
+    <string name="detail_screen">Transactions for %1$s</string>
+    <string name="file_does_not_exist_error">There was a problem when reading data</string>
+    <string name="loading">loading…</string>
+    <string name="no_results">No products found</string>
+    <string name="product_list_empty">Product list is empty</string>
+    <string name="transaction_product">%1$d transactions</string>
+    <string name="amount_transaction">%1$s %2$s</string>
+    <string name="title_on_transaction_detail">Total: GBP %1$s</string>
+    <string name="transaction_list_empty">Transactions list is empty</string>
+    <string name="rates_successfully_loaded">Currency Rates were loaded successfully.</string>
+    <string name="path1">dataset1</string>
+    <string name="path2">dataset2</string>
+</resources>

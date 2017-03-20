@@ -1,0 +1,1 @@
+[{"from":"AUD","rate":"0.5","to":"USD"},{"from":"USD","rate":"0.5","to":"EUR"},{"from":"EUR","rate":"0.5","to":"GBP"},{"from":"GBP","rate":"2","to":"EUR"},{"from":"EUR","rate":"2","to":"USD"},{"from":"USD","rate":"2","to":"AUD"}]
