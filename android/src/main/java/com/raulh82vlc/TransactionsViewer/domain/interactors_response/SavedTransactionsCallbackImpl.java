@@ -33,11 +33,15 @@ public class SavedTransactionsCallbackImpl implements SavedTransactionsListInter
     }
     @Override
     public void onSavedTransactionsListOK(String msg) {
-        mView.productsSavedSuccessfully(msg);
+        if (mView.isReady()) {
+            mView.productsSavedSuccessfully(msg);
+        }
     }
 
     @Override
     public void onSavedTransactionsListKO(String error) {
-        mView.errorSavingProducts(error);
+        if (mView.isReady()) {
+            mView.errorSavingProducts(error);
+        }
     }
 }

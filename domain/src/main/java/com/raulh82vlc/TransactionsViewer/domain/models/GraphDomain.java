@@ -25,8 +25,8 @@ import java.util.Map;
 import java.util.Queue;
 
 /**
- * Graph Domain composed by a dictionary of Vertex with its adjacent Edges
- * Contains BSF algorithm to find the corresponding currency
+ * <p><Graph from the domain composed by a dictionary of Vertex with its adjacent Edges
+ * Contains BSF algorithm to find the corresponding currency</p>
  *
  * @author Raul Hernandez Lopez.
  */

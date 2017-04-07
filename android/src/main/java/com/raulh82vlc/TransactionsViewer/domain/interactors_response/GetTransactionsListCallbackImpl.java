@@ -24,7 +24,7 @@ import com.raulh82vlc.TransactionsViewer.ui.presentation.TransactionsPresenter;
 import java.util.List;
 
 /**
- * Get Transactions List Callback communicating towards view
+ * Get Transactions List Callback communicating towards its view
  *
  * @author Raul Hernandez Lopez.
  */
@@ -42,11 +42,15 @@ public class GetTransactionsListCallbackImpl implements GetTransactionListIntera
 
     @Override
     public void onGetTransactionsListOK(List<Transaction> transactionList) {
-        mView.saveProducts(transactionsListModelDataMapper.transform(transactionList), transactionList);
+        if (mView.isReady()) {
+            mView.saveProducts(transactionsListModelDataMapper.transform(transactionList), transactionList);
+        }
     }
 
     @Override
     public void onGetTransactionListKO(String error) {
-        mView.errorGettingTransactions(error);
+        if (mView.isReady()) {
+            mView.errorGettingTransactions(error);
+        }
     }
 }

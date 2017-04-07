@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.raulh82vlc.BadooTest;
+package com.raulh82vlc.TransactionsViewer;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

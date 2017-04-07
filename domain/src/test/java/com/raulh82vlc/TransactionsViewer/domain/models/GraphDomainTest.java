@@ -16,10 +16,6 @@
 
 package com.raulh82vlc.TransactionsViewer.domain.models;
 
-import com.raulh82vlc.TransactionsViewer.domain.models.GraphDomain;
-import com.raulh82vlc.TransactionsViewer.domain.models.RoundingUtil;
-import com.raulh82vlc.TransactionsViewer.domain.models.VertexDomain;
-
 import org.junit.Before;
 import org.junit.Test;
 

@@ -16,27 +16,31 @@
 
 package com.raulh82vlc.TransactionsViewer.domain.interactors_response;
 
+import android.support.annotation.NonNull;
+
 import com.raulh82vlc.TransactionsViewer.domain.interactors.ComputeTransactionsInteractor;
 import com.raulh82vlc.TransactionsViewer.domain.interactors.mappers.TransactionsRatedDataMapper;
 import com.raulh82vlc.TransactionsViewer.domain.models.TransactionRatedDomain;
-import com.raulh82vlc.TransactionsViewer.domain.interactors_response.GetTransactionsComputedCallbackImpl;
 import com.raulh82vlc.TransactionsViewer.ui.presentation.ComputingTransactionsPresenter;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.verification.VerificationMode;
 
 import java.util.List;
 
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  *
- * <p>GetTransactionsComputedCallbackImpl mock to verify interacts well with the listener</p>
+ * <p>Get Transactions Computed CallbackImpl interaction with its view or mapper</p>
  *
  * @author Raul Hernandez Lopez.
  */
@@ -61,15 +65,57 @@ public class GetTransactionsComputedCallbackImplTest {
     }
 
     @Test
-    public void callbackIsWorkingForOK () throws Exception {
+    public void callbackIsWorkingForOKAndReady () throws Exception {
+        // when it is returned true for the isReady method by default,
+        // then we could check 1 iteration appears on each method
+        when(view.isReady()).thenReturn(true);
         callbackToTest.onGetTransactionsListOK(list, amount);
-        verify(view).computedRatesForTransactions(anyList(), anyString());
-        verify(mapper).transformToUI(anyList());
+        verify(view, getTimes()).isReady();
+        verify(view, getTimes()).computedRatesForTransactions(anyList(), anyString());
+        verify(view, getTimes()).visibilityChangesAfterSuccessfulComputedRates();
+        verify(mapper, getTimes()).transformToUI(anyList());
     }
 
     @Test
-    public void callbackIsWorkingForKO () throws Exception {
+    public void callbackIsStoppedWhenOKAndNotReady () throws Exception {
+        // when it is returned false for the isReady method by default,
+        // then we could check no iteration appears at errorComputingRates
+        when(view.isReady()).thenReturn(false);
+        callbackToTest.onGetTransactionsListOK(list, amount);
+        verify(view, getTimes()).isReady();
+        verify(view, getNoTime()).computedRatesForTransactions(anyList(), anyString());
+        verify(view, getNoTime()).visibilityChangesAfterSuccessfulComputedRates();
+    }
+
+    @Test
+    public void callbackIsWorkingForKOAndReady () throws Exception {
+        // when it is returned true for the isReady method by default,
+        // then we could check 1 iteration appears on each method
+        when(view.isReady()).thenReturn(true);
         callbackToTest.onGetTransactionListKO(error);
-        verify(view).errorComputingRates(anyString());
+        verify(view, getTimes()).isReady();
+        verify(view, getTimes()).errorComputingRates(anyString());
+        verify(view, getTimes()).visibilityChangesAfterErrorComputedRates();
+    }
+
+    @Test
+    public void callbackIsStoppedWhenKOAndNotReady () throws Exception {
+        // when it is returned false for the isReady method by default,
+        // then we could check no iteration appears at errorComputingRates
+        when(view.isReady()).thenReturn(false);
+        callbackToTest.onGetTransactionListKO(anyString());
+        verify(view, getTimes()).isReady();
+        verify(view, getNoTime()).errorComputingRates(anyString());
+        verify(view, getNoTime()).visibilityChangesAfterErrorComputedRates();
+    }
+
+    @NonNull
+    private VerificationMode getTimes() {
+        return times(1);
+    }
+
+    @NonNull
+    private VerificationMode getNoTime() {
+        return times(0);
     }
 }

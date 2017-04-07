@@ -35,6 +35,8 @@ public interface TransactionsPresenter {
 
     void saveProducts(List<Transaction> transactionList, Map<String, List<Transaction>> transactionsMap) throws CustomException;
 
+    void resetView();
+
     interface View {
         void saveProducts(Map<String, List<Transaction>> transactionsMap, List<Transaction> transactionList);
 
@@ -47,5 +49,7 @@ public interface TransactionsPresenter {
         void showProductsList(List<ProductUI> productUIs);
 
         void showEmptyState();
+
+        boolean isReady();
     }
 }

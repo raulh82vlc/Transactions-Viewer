@@ -50,9 +50,17 @@ public class ComputingTransactionsPresenterImpl implements ComputingTransactions
     }
 
     @Override
+    public void resetView() {
+        view = null;
+    }
+
+    @Override
     public void computeRates(String skuFromProduct, String toCurrency, String pathTransactions,
                              String pathRates) throws CustomException {
-        startComputingRates(skuFromProduct, toCurrency, pathTransactions, pathRates);
+        if (view != null) {
+            view.startLoader();
+            startComputingRates(skuFromProduct, toCurrency, pathTransactions, pathRates);
+        }
     }
 
     private void startComputingRates(String skuFromProduct, String toCurrency, String pathTransactions,
