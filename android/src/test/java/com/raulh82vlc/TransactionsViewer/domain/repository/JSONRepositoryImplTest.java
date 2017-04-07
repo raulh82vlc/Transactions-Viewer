@@ -36,7 +36,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  *
- * <p>GetTransactionsComputedCallbackImpl mock to verify interacts well with the listener</p>
+ * <p>Checks the repository pattern behaviour adding rates or transactions</p>
  *
  * @author Raul Hernandez Lopez.
  */
