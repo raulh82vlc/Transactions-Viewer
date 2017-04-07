@@ -43,6 +43,7 @@ public class GetTransactionsComputedCallbackImpl implements ComputeTransactionsI
     public void onGetTransactionsListOK(List<TransactionRatedDomain> transactionList, String totalAmount) {
         if (mView.isReady()) {
             mView.computedRatesForTransactions(transactionsRatedDataMapper.transformToUI(transactionList), totalAmount);
+            mView.visibilityChangesAfterSuccessfulComputedRates();
         }
     }
 
@@ -50,6 +51,7 @@ public class GetTransactionsComputedCallbackImpl implements ComputeTransactionsI
     public void onGetTransactionListKO(String error) {
         if (mView.isReady()) {
             mView.errorComputingRates(error);
+            mView.visibilityChangesAfterErrorComputedRates();
         }
     }
 }

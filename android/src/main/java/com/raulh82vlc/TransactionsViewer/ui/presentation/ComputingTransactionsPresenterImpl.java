@@ -58,6 +58,7 @@ public class ComputingTransactionsPresenterImpl implements ComputingTransactions
     public void computeRates(String skuFromProduct, String toCurrency, String pathTransactions,
                              String pathRates) throws CustomException {
         if (view != null) {
+            view.startLoader();
             startComputingRates(skuFromProduct, toCurrency, pathTransactions, pathRates);
         }
     }

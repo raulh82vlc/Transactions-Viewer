@@ -16,7 +16,6 @@
 
 package com.raulh82vlc.TransactionsViewer.ui.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -76,7 +75,7 @@ public class ProductsListActivity extends BaseActivity {
     }
 
     @Override
-    protected Activity getActivity() {
+    protected ProductsListActivity getActivity() {
         return this;
     }
 }

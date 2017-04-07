@@ -65,34 +65,48 @@ public class GetTransactionsComputedCallbackImplTest {
     }
 
     @Test
-    public void callbackIsWorkingForOK () throws Exception {
+    public void callbackIsWorkingForOKAndReady () throws Exception {
         // when it is returned true for the isReady method by default,
         // then we could check 1 iteration appears on each method
         when(view.isReady()).thenReturn(true);
         callbackToTest.onGetTransactionsListOK(list, amount);
         verify(view, getTimes()).isReady();
         verify(view, getTimes()).computedRatesForTransactions(anyList(), anyString());
+        verify(view, getTimes()).visibilityChangesAfterSuccessfulComputedRates();
         verify(mapper, getTimes()).transformToUI(anyList());
     }
 
     @Test
-    public void callbackIsWorkingForKO () throws Exception {
+    public void callbackIsStoppedWhenOKAndNotReady () throws Exception {
+        // when it is returned false for the isReady method by default,
+        // then we could check no iteration appears at errorComputingRates
+        when(view.isReady()).thenReturn(false);
+        callbackToTest.onGetTransactionsListOK(list, amount);
+        verify(view, getTimes()).isReady();
+        verify(view, getNoTime()).computedRatesForTransactions(anyList(), anyString());
+        verify(view, getNoTime()).visibilityChangesAfterSuccessfulComputedRates();
+    }
+
+    @Test
+    public void callbackIsWorkingForKOAndReady () throws Exception {
         // when it is returned true for the isReady method by default,
         // then we could check 1 iteration appears on each method
         when(view.isReady()).thenReturn(true);
         callbackToTest.onGetTransactionListKO(error);
         verify(view, getTimes()).isReady();
         verify(view, getTimes()).errorComputingRates(anyString());
+        verify(view, getTimes()).visibilityChangesAfterErrorComputedRates();
     }
 
     @Test
-    public void callbackIsStopped () throws Exception {
+    public void callbackIsStoppedWhenKOAndNotReady () throws Exception {
         // when it is returned false for the isReady method by default,
         // then we could check no iteration appears at errorComputingRates
         when(view.isReady()).thenReturn(false);
-        callbackToTest.onGetTransactionsListOK(list, amount);
+        callbackToTest.onGetTransactionListKO(anyString());
         verify(view, getTimes()).isReady();
         verify(view, getNoTime()).errorComputingRates(anyString());
+        verify(view, getNoTime()).visibilityChangesAfterErrorComputedRates();
     }
 
     @NonNull

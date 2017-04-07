@@ -16,7 +16,6 @@
 
 package com.raulh82vlc.TransactionsViewer.ui.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -112,22 +111,23 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         component().inject(this);
-
         computingTransactionsPresenter.setView(this);
         if (getIntent() != null) {
-            mSkuFromProduct = getIntent().getStringExtra(KEY_PRODUCT_SKU);
-            mPathTransactions = getIntent().getStringExtra(KEY_TRANSACTIONS_PATH);
-            mPathRates = getIntent().getStringExtra(KEY_RATES_PATH);
+            setIntentParameters();
             setInitialTitle();
             setTransactions();
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             setRecyclerAdapter();
         }
         setToolbarInitialisation();
     }
 
+    private void setIntentParameters() {
+        mSkuFromProduct = getIntent().getStringExtra(KEY_PRODUCT_SKU);
+        mPathTransactions = getIntent().getStringExtra(KEY_TRANSACTIONS_PATH);
+        mPathRates = getIntent().getStringExtra(KEY_RATES_PATH);
+    }
+
     private void setTransactions() {
-        startLoader();
         try {
             computingTransactionsPresenter.computeRates(mSkuFromProduct, GBP_CURRENCY, mPathTransactions, mPathRates);
         } catch (CustomException e) {
@@ -136,7 +136,8 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
         }
     }
 
-    private void startLoader() {
+    @Override
+    public void startLoader() {
         hideLoader();
         showLoaderWithTitleAndDescription(
                 getString(R.string.detail_screen, mSkuFromProduct),
@@ -164,7 +165,7 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
     }
 
     @Override
-    protected Activity getActivity() {
+    protected ProductsTransactionsActivity getActivity() {
         return this;
     }
 
@@ -172,6 +173,7 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
      * <p>Sets the adapter and recyclerview</p>
      **/
     private void setRecyclerAdapter() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new TransactionsListAdapter();
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -193,20 +195,28 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
     public void errorComputingRates(String error) {
         Log.e(TAG, error);
         Toast.makeText(this, error, Toast.LENGTH_LONG).show();
-        setUIWidgetsVisibility(View.VISIBLE, View.GONE);
-        hideLoader();
     }
 
     @Override
     public void computedRatesForTransactions(List<TransactionUI> transactions, String totalAmount) {
         mAdapter.updateTransactions(transactions);
         mTitleTxt.setText(getString(R.string.title_on_transaction_detail, totalAmount));
+    }
+
+    @Override
+    public void visibilityChangesAfterSuccessfulComputedRates() {
         setUIWidgetsVisibility(View.GONE, View.VISIBLE);
         hideLoader();
     }
 
     @Override
+    public void visibilityChangesAfterErrorComputedRates() {
+        setUIWidgetsVisibility(View.VISIBLE, View.GONE);
+        hideLoader();
+    }
+
+    @Override
     public boolean isReady() {
-        return mAdapter != null;
+        return !isFinishing();
     }
 }

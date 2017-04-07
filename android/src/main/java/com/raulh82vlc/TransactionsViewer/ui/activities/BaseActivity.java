@@ -16,7 +16,6 @@
 
 package com.raulh82vlc.TransactionsViewer.ui.activities;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -48,7 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract int getLayoutId();
 
-    protected abstract Activity getActivity();
+    protected abstract AppCompatActivity getActivity();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

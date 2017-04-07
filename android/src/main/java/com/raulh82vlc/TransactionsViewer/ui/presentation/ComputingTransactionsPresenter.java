@@ -41,6 +41,12 @@ public interface ComputingTransactionsPresenter {
 
         void computedRatesForTransactions(List<TransactionUI> transactions, String totalAmount);
 
+        void visibilityChangesAfterSuccessfulComputedRates();
+
+        void visibilityChangesAfterErrorComputedRates();
+
         boolean isReady();
+
+        void startLoader();
     }
 }
