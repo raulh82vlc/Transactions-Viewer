@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.raulh82vlc.BadooTest.com.raulh82vlc.TransactionsViewer.ui.activities.ProductsListActivity" >
+    tools:context="com.raulh82vlc.TransactionsViewer.ui.activities.ProductsListActivity" >
 
     <fragment
         android:id="@+id/fragment_products_list"

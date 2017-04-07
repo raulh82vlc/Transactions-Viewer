@@ -24,7 +24,8 @@ import com.raulh82vlc.TransactionsViewer.ui.presentation.RatesPresenter;
 import java.util.List;
 
 /**
- * Callback with the response of the Interactor
+ * Get Rates list by means of its callback, communicating towards its view
+ *
  * @author Raul Hernandez Lopez.
  */
 public class GetRatesListCallbackImpl implements GetRatesListInteractor.GetRatesListCallback {
@@ -41,11 +42,15 @@ public class GetRatesListCallbackImpl implements GetRatesListInteractor.GetRates
 
     @Override
     public void onGetRatesListOK(List<Rate> rateList) {
-        mView.loadedRates(ratesListModelDataMapper.transform(rateList));
+        if (mView.isReady()) {
+            mView.loadedRates(ratesListModelDataMapper.transform(rateList));
+        }
     }
 
     @Override
     public void onGetRatesListKO(String error) {
-        mView.errorGettingRates(error);
+        if (mView.isReady()) {
+            mView.errorGettingRates(error);
+        }
     }
 }

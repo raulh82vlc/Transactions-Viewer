@@ -16,16 +16,16 @@
 
 package com.raulh82vlc.TransactionsViewer.ui.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 
-import com.raulh82vlc.TransactionsViewer.TransactionsViewerApp;
 import com.raulh82vlc.TransactionsViewer.R;
+import com.raulh82vlc.TransactionsViewer.TransactionsViewerApp;
 import com.raulh82vlc.TransactionsViewer.di.components.DaggerProductsListComponent;
 import com.raulh82vlc.TransactionsViewer.di.components.ProductsListComponent;
 import com.raulh82vlc.TransactionsViewer.di.modules.ActivityModule;
-
-import butterknife.ButterKnife;
 
 /**
  * <p>Products List Activity</p>
@@ -46,12 +46,11 @@ public class ProductsListActivity extends BaseActivity {
         return mProductsListComponent;
     }
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products_list);
         component().inject(this);
-        ButterKnife.inject(this);
         setToolbarInitialisation();
         setInitialTitle();
     }
@@ -69,5 +68,15 @@ public class ProductsListActivity extends BaseActivity {
             actionBar.setHomeButtonEnabled(false);
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_products_list;
+    }
+
+    @Override
+    protected Activity getActivity() {
+        return this;
     }
 }

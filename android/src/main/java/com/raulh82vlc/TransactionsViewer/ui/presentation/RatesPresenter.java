@@ -32,9 +32,13 @@ public interface RatesPresenter {
 
     void setView(View view);
 
+    void resetView();
+
     interface View {
         void errorGettingRates(String error);
 
         void loadedRates(List<RateUI> listOfRates);
+
+        boolean isReady();
     }
 }

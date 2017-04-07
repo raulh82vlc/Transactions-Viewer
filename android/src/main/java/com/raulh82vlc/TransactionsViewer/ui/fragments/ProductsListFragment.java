@@ -79,10 +79,10 @@ public class ProductsListFragment extends BaseFragment implements
      * DI
      */
     @Inject
-    RatesPresenter mRatePresenter;
+    RatesPresenter ratePresenter;
 
     @Inject
-    TransactionsPresenter mTransactionsPresenter;
+    TransactionsPresenter transactionsPresenter;
 
     // UI Widgets
     private ProductsListAdapter mAdapter;
@@ -111,8 +111,8 @@ public class ProductsListFragment extends BaseFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mActivity.component().inject(this);
-        mRatePresenter.setView(this);
-        mTransactionsPresenter.setView(this);
+        ratePresenter.setView(this);
+        transactionsPresenter.setView(this);
         loadInfo(PATH_TRANSACTIONS_DEFAULT, PATH_RATES_DEFAULT);
     }
 
@@ -127,6 +127,8 @@ public class ProductsListFragment extends BaseFragment implements
 
     @Override
     public void onDestroyView() {
+        transactionsPresenter.resetView();
+        ratePresenter.resetView();
         mAdapter = null;
         super.onDestroyView();
     }
@@ -180,7 +182,7 @@ public class ProductsListFragment extends BaseFragment implements
 
     private void loadTransactions(String path) {
         try {
-            mTransactionsPresenter.startReading(path);
+            transactionsPresenter.startReading(path);
         } catch (CustomException e) {
             Log.e(TAG, e.getMessage(), e);
             Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -189,7 +191,7 @@ public class ProductsListFragment extends BaseFragment implements
 
     private void loadRates(String path) {
         try {
-            mRatePresenter.startReading(path);
+            ratePresenter.startReading(path);
         } catch (CustomException e) {
             Log.e(TAG, e.getMessage(), e);
             Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -221,7 +223,7 @@ public class ProductsListFragment extends BaseFragment implements
     @Override
     public void saveProducts(Map<String, List<Transaction>> transactionsMap, List<Transaction> transactionList) {
         try {
-            mTransactionsPresenter.saveProducts(transactionList, transactionsMap);
+            transactionsPresenter.saveProducts(transactionList, transactionsMap);
         } catch (CustomException e) {
             Toast.makeText(mActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -262,5 +264,10 @@ public class ProductsListFragment extends BaseFragment implements
         mNoResultsTextView.setText(getString(R.string.no_results));
         setUIWidgetsVisibility(View.VISIBLE, View.GONE);
         mActivity.hideLoader();
+    }
+
+    @Override
+    public boolean isReady() {
+        return isAdded();
     }
 }

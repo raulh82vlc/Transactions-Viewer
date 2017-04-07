@@ -24,6 +24,8 @@ import com.raulh82vlc.TransactionsViewer.ui.presentation.ComputingTransactionsPr
 import java.util.List;
 
 /**
+ * Get Transactions list by means of its callback, communicating towards its view
+ *
  * @author Raul Hernandez Lopez.
  */
 
@@ -39,11 +41,15 @@ public class GetTransactionsComputedCallbackImpl implements ComputeTransactionsI
 
     @Override
     public void onGetTransactionsListOK(List<TransactionRatedDomain> transactionList, String totalAmount) {
-        mView.computedRatesForTransactions(transactionsRatedDataMapper.transformToUI(transactionList), totalAmount);
+        if (mView.isReady()) {
+            mView.computedRatesForTransactions(transactionsRatedDataMapper.transformToUI(transactionList), totalAmount);
+        }
     }
 
     @Override
     public void onGetTransactionListKO(String error) {
-        mView.errorComputingRates(error);
+        if (mView.isReady()) {
+            mView.errorComputingRates(error);
+        }
     }
 }

@@ -51,8 +51,15 @@ public class RatesPresenterImpl implements RatesPresenter {
     }
 
     @Override
+    public void resetView() {
+        view = null;
+    }
+
+    @Override
     public void startReading(String path) throws CustomException {
-        startGettingRatesListFromJSON(path);
+        if (view != null) {
+            startGettingRatesListFromJSON(path);
+        }
     }
 
     private void startGettingRatesListFromJSON(String path) throws CustomException {

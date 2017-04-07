@@ -54,7 +54,13 @@ public class TransactionsPresenterImpl implements TransactionsPresenter {
 
     @Override
     public void startReading(String path) throws CustomException {
-        startGettingTransactionsListFromJSON(path);
+        if (view != null) {
+            startGettingTransactionsListFromJSON(path);
+        }
+    }
+
+    private void startGettingTransactionsListFromJSON(String path) throws CustomException {
+        interactor.execute(path, new GetTransactionsListCallbackImpl(view, transactionsListModelDataMapper));
     }
 
     @Override
@@ -67,8 +73,14 @@ public class TransactionsPresenterImpl implements TransactionsPresenter {
 
     @Override
     public void saveProducts(List<Transaction> transactionList, Map<String, List<Transaction>> transactionsMap) throws CustomException {
-        List<ProductUI> productUIs = transactionsListModelDataMapper.transform(transactionsMap);
-        interactorSaver.executeSaveTransactions(transactionsMap, new SavedTransactionsCallbackImpl(view));
+        if (view != null) {
+            List<ProductUI> productUIs = transactionsListModelDataMapper.transform(transactionsMap);
+            interactorSaver.executeSaveTransactions(transactionsMap, new SavedTransactionsCallbackImpl(view));
+            showProducts(productUIs);
+        }
+    }
+
+    private void showProducts(List<ProductUI> productUIs) {
         if (productUIs.size() > 0) {
             view.showProductsList(productUIs);
         } else {
@@ -76,7 +88,8 @@ public class TransactionsPresenterImpl implements TransactionsPresenter {
         }
     }
 
-    private void startGettingTransactionsListFromJSON(String path) throws CustomException {
-        interactor.execute(path, new GetTransactionsListCallbackImpl(view, transactionsListModelDataMapper));
+    @Override
+    public void resetView() {
+        view = null;
     }
 }

@@ -32,11 +32,15 @@ public interface ComputingTransactionsPresenter {
 
     void setView(View view);
 
+    void resetView();
+
     void computeRates(String skuFromProduct, String toCurrency, String pathTransactions, String pathRates) throws CustomException;
 
     interface View {
         void errorComputingRates(String error);
 
         void computedRatesForTransactions(List<TransactionUI> transactions, String totalAmount);
+
+        boolean isReady();
     }
 }

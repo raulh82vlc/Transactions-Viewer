@@ -19,7 +19,6 @@ package com.raulh82vlc.TransactionsViewer.domain.repository;
 import com.raulh82vlc.TransactionsViewer.domain.datasources.json.JSONDataSourceImpl;
 import com.raulh82vlc.TransactionsViewer.domain.models.Rate;
 import com.raulh82vlc.TransactionsViewer.domain.models.Transaction;
-import com.raulh82vlc.TransactionsViewer.domain.repository.JSONRepositoryImpl;
 
 import org.junit.After;
 import org.junit.Before;

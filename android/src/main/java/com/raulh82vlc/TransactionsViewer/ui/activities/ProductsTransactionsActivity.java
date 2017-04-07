@@ -16,8 +16,10 @@
 
 package com.raulh82vlc.TransactionsViewer.ui.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,8 +29,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.raulh82vlc.TransactionsViewer.TransactionsViewerApp;
 import com.raulh82vlc.TransactionsViewer.R;
+import com.raulh82vlc.TransactionsViewer.TransactionsViewerApp;
 import com.raulh82vlc.TransactionsViewer.di.components.DaggerProductTransactionsComponent;
 import com.raulh82vlc.TransactionsViewer.di.components.ProductTransactionsComponent;
 import com.raulh82vlc.TransactionsViewer.di.modules.ActivityModule;
@@ -41,7 +43,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
@@ -69,10 +70,10 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
     private TransactionsListAdapter mAdapter;
 
     // Product Component for dagger
-    private com.raulh82vlc.TransactionsViewer.di.components.ProductTransactionsComponent ProductTransactionsComponent;
+    private ProductTransactionsComponent ProductTransactionsComponent;
 
     @Inject
-    ComputingTransactionsPresenter presenter;
+    ComputingTransactionsPresenter computingTransactionsPresenter;
 
     // Data structures
     private String mSkuFromProduct;
@@ -108,12 +109,11 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction_details);
         component().inject(this);
-        ButterKnife.inject(this);
-        presenter.setView(this);
+
+        computingTransactionsPresenter.setView(this);
         if (getIntent() != null) {
             mSkuFromProduct = getIntent().getStringExtra(KEY_PRODUCT_SKU);
             mPathTransactions = getIntent().getStringExtra(KEY_TRANSACTIONS_PATH);
@@ -129,7 +129,7 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
     private void setTransactions() {
         startLoader();
         try {
-            presenter.computeRates(mSkuFromProduct, GBP_CURRENCY, mPathTransactions, mPathRates);
+            computingTransactionsPresenter.computeRates(mSkuFromProduct, GBP_CURRENCY, mPathTransactions, mPathRates);
         } catch (CustomException e) {
             Log.e(TAG, e.getMessage());
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -158,6 +158,16 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
         }
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_transaction_details;
+    }
+
+    @Override
+    protected Activity getActivity() {
+        return this;
+    }
+
     /**
      * <p>Sets the adapter and recyclerview</p>
      **/
@@ -169,7 +179,7 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
     @Override
     protected void onDestroy() {
         mAdapter = null;
-        ButterKnife.reset(this);
+        computingTransactionsPresenter.resetView();
         super.onDestroy();
     }
 
@@ -193,5 +203,10 @@ public class ProductsTransactionsActivity extends BaseActivity implements Comput
         mTitleTxt.setText(getString(R.string.title_on_transaction_detail, totalAmount));
         setUIWidgetsVisibility(View.GONE, View.VISIBLE);
         hideLoader();
+    }
+
+    @Override
+    public boolean isReady() {
+        return mAdapter != null;
     }
 }
