@@ -1,4 +1,5 @@
 language: android
+jdk: oraclejdk8
 notifications:
     email:
         - raul.h82@gmail.com
