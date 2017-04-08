@@ -27,7 +27,6 @@ android {
         targetSdkVersion parent.ext.androidTargetSdkVersion
         versionCode parent.ext.androidVersionCode
         versionName parent.ext.androidVersionName
-//        testIntrumentationRunner parent.ext.testingInstrumentationRunner
     }
 
     testOptions {

@@ -47,7 +47,7 @@ info, such as the SKU identifier per product, the kind of dataset to look at, et
 - There is a small amount of Unit test cases for the most critical parts: mainly the Graph logic, then repository as well as view interaction.
 
 ### SDK support
-Support SDKs from **15** to **25**
+Support SDKs from **16** to **25**
 
 # Disclosure - Libraries used
 - [Dagger 2](http://google.github.io/dagger) for Dependency Injection
