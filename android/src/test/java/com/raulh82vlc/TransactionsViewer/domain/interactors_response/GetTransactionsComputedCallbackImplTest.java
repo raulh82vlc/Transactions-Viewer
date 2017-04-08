@@ -39,15 +39,14 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
- *
  * <p>Get Transactions Computed CallbackImpl interaction with its view or mapper</p>
  *
  * @author Raul Hernandez Lopez.
  */
 
 public class GetTransactionsComputedCallbackImplTest {
-    private final String amount = "2222";
-    private final String error = "error";
+    private final static String AMOUNT = "2222";
+    private final static String ERROR = "ERROR";
 
     @Mock
     private ComputingTransactionsPresenter.View view;
@@ -65,11 +64,11 @@ public class GetTransactionsComputedCallbackImplTest {
     }
 
     @Test
-    public void callbackIsWorkingForOKAndReady () throws Exception {
+    public void callbackIsWorkingForOKAndReady() throws Exception {
         // when it is returned true for the isReady method by default,
         // then we could check 1 iteration appears on each method
         when(view.isReady()).thenReturn(true);
-        callbackToTest.onGetTransactionsListOK(list, amount);
+        callbackToTest.onGetTransactionsListOK(list, AMOUNT);
         verify(view, getTimes()).isReady();
         verify(view, getTimes()).computedRatesForTransactions(anyList(), anyString());
         verify(view, getTimes()).visibilityChangesAfterSuccessfulComputedRates();
@@ -77,29 +76,29 @@ public class GetTransactionsComputedCallbackImplTest {
     }
 
     @Test
-    public void callbackIsStoppedWhenOKAndNotReady () throws Exception {
+    public void callbackIsStoppedWhenOKAndNotReady() throws Exception {
         // when it is returned false for the isReady method by default,
         // then we could check no iteration appears at errorComputingRates
         when(view.isReady()).thenReturn(false);
-        callbackToTest.onGetTransactionsListOK(list, amount);
+        callbackToTest.onGetTransactionsListOK(list, AMOUNT);
         verify(view, getTimes()).isReady();
         verify(view, getNoTime()).computedRatesForTransactions(anyList(), anyString());
         verify(view, getNoTime()).visibilityChangesAfterSuccessfulComputedRates();
     }
 
     @Test
-    public void callbackIsWorkingForKOAndReady () throws Exception {
+    public void callbackIsWorkingForKOAndReady() throws Exception {
         // when it is returned true for the isReady method by default,
         // then we could check 1 iteration appears on each method
         when(view.isReady()).thenReturn(true);
-        callbackToTest.onGetTransactionListKO(error);
+        callbackToTest.onGetTransactionListKO(ERROR);
         verify(view, getTimes()).isReady();
         verify(view, getTimes()).errorComputingRates(anyString());
         verify(view, getTimes()).visibilityChangesAfterErrorComputedRates();
     }
 
     @Test
-    public void callbackIsStoppedWhenKOAndNotReady () throws Exception {
+    public void callbackIsStoppedWhenKOAndNotReady() throws Exception {
         // when it is returned false for the isReady method by default,
         // then we could check no iteration appears at errorComputingRates
         when(view.isReady()).thenReturn(false);

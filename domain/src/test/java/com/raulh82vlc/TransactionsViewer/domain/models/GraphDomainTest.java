@@ -48,12 +48,12 @@ public class GraphDomainTest {
     }
 
     @Test
-    public void graphIsEmpty () throws Exception {
+    public void graphIsEmpty() throws Exception {
         assertEquals(0, mGraphDomain.getSize());
     }
 
     @Test
-    public void currencyForASimpleCombination () throws Exception {
+    public void currencyForASimpleCombination() throws Exception {
         mGraphDomain.addEdge(new VertexDomain("CAN"), new VertexDomain("GBP"), new BigDecimal(0.5));
         assertEquals(1, mGraphDomain.getSize());
         BigDecimal currency = mGraphDomain.searchCurrency("CAN", "GBP");
@@ -61,29 +61,31 @@ public class GraphDomainTest {
     }
 
     @Test
-    public void currencyWith2Jumps () throws Exception {
+    public void currencyWith2Jumps() throws Exception {
         setCompleteDataSetLikeJSON();
         assertEquals(NUM_VERTICES_COMPLETE_DATASET, mGraphDomain.getSize());
         /**
          * CAD -> USD -> GBP
          */
         BigDecimal currency = mGraphDomain.searchCurrency("CAD", "GBP");
-        assertEquals(RoundingUtil.round(new BigDecimal(0.71), ROUND_DIGITS), RoundingUtil.round(currency, ROUND_DIGITS));
+        assertEquals(RoundingUtil.round(new BigDecimal(0.71), ROUND_DIGITS),
+                RoundingUtil.round(currency, ROUND_DIGITS));
     }
 
     @Test
-    public void currencyWith3Jumps () throws Exception {
+    public void currencyWith3Jumps() throws Exception {
         setCompleteDataSetLikeJSON();
         assertEquals(NUM_VERTICES_COMPLETE_DATASET, mGraphDomain.getSize());
         /**
          * CAD -> USD -> GBP -> AUD
          */
         BigDecimal currency = mGraphDomain.searchCurrency("CAD", "AUD");
-        assertEquals(RoundingUtil.round(new BigDecimal(0.59), ROUND_DIGITS), RoundingUtil.round(currency, ROUND_DIGITS));
+        assertEquals(RoundingUtil.round(new BigDecimal(0.59), ROUND_DIGITS),
+                RoundingUtil.round(currency, ROUND_DIGITS));
     }
 
     @Test
-    public void currencyFromAndToSame () throws Exception {
+    public void currencyFromAndToSame() throws Exception {
         setCompleteDataSetLikeJSON();
         assertEquals(NUM_VERTICES_COMPLETE_DATASET, mGraphDomain.getSize());
         BigDecimal currency = mGraphDomain.searchCurrency("GBP", "GBP");
@@ -91,7 +93,7 @@ public class GraphDomainTest {
     }
 
     @Test
-    public void currencyFromEmptyCurrencies () throws Exception {
+    public void currencyFromEmptyCurrencies() throws Exception {
         setCompleteDataSetLikeJSON();
         assertEquals(NUM_VERTICES_COMPLETE_DATASET, mGraphDomain.getSize());
         BigDecimal currency = mGraphDomain.searchCurrency("", "");

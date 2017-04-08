@@ -29,6 +29,7 @@ android {
         versionName parent.ext.androidVersionName
 //        testIntrumentationRunner parent.ext.testingInstrumentationRunner
     }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -52,6 +53,7 @@ android {
 dependencies {
     compile project(':domain')
     compile parent.ext.libButterknife
+    compile parent.ext.libSupportAnnotations
     compile parent.ext.libAppCompat
     compile parent.ext.libDesignCompat
     compile parent.ext.libRecyclerView
@@ -60,6 +62,9 @@ dependencies {
     compile parent.ext.libDagger
     testCompile parent.ext.testingMockito
     testCompile parent.ext.testingJUnit
+    androidTestCompile parent.ext.testingInstrumentationRunner
+    androidTestCompile parent.ext.testingRules
+    androidTestCompile parent.ext.testingSupportAnnotations
 }
 
 

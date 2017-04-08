@@ -38,6 +38,6 @@ import dagger.Component;
                 ProductTransactionsModule.class
         })
 public interface ProductTransactionsComponent extends AbstractActivityComponent {
-    void inject(ProductsTransactionsActivity ProductsTransactionsActivity);
+    void inject(ProductsTransactionsActivity productsTransactionsActivity);
 }
 

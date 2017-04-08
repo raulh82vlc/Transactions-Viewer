@@ -39,7 +39,7 @@ import dagger.Component;
                 ProductsListModule.class
         })
 public interface ProductsListComponent extends AbstractActivityComponent {
-    void inject(ProductsListActivity ProductsListActivity);
+    void inject(ProductsListActivity productsListActivity);
 
-    void inject(ProductsListFragment ProductsListFragment);
+    void inject(ProductsListFragment productsListFragment);
 }

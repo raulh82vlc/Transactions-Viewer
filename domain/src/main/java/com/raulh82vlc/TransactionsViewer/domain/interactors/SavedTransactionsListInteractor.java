@@ -27,7 +27,8 @@ import java.util.Map;
  */
 
 public interface SavedTransactionsListInteractor {
-    void executeSaveTransactions(Map<String, List<Transaction>> transactionList, SavedTransactionsCallback savedTransactionsCallback) throws CustomException;
+    void executeSaveTransactions(Map<String, List<Transaction>> transactionList,
+                                 SavedTransactionsCallback savedTransactionsCallback) throws CustomException;
 
     interface SavedTransactionsCallback {
         void onSavedTransactionsListOK(String msg);

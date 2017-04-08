@@ -37,7 +37,7 @@ public class SavedTransactionListInteractorImpl implements SavedTransactionsList
 
     private InteractorExecutor executor;
     private MainThread mainThread;
-    private DataRepository<Rate,Transaction> repository;
+    private DataRepository<Rate, Transaction> repository;
     private Map<String, List<Transaction>> map;
     private SavedTransactionsCallback callback;
 
@@ -51,7 +51,8 @@ public class SavedTransactionListInteractorImpl implements SavedTransactionsList
     }
 
     @Override
-    public void executeSaveTransactions(Map<String, List<Transaction>> transactionDictionary, SavedTransactionsCallback savedTransactionsCallback) throws CustomException {
+    public void executeSaveTransactions(Map<String, List<Transaction>> transactionDictionary,
+                                        SavedTransactionsCallback savedTransactionsCallback) throws CustomException {
         this.map = transactionDictionary;
         this.callback = savedTransactionsCallback;
         this.executor.run(this);

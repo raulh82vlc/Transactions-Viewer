@@ -16,11 +16,11 @@
 
 package com.raulh82vlc.TransactionsViewer.ui.presentation;
 
+import com.raulh82vlc.TransactionsViewer.domain.exceptions.CustomException;
 import com.raulh82vlc.TransactionsViewer.domain.interactors.GetTransactionListInteractor;
 import com.raulh82vlc.TransactionsViewer.domain.interactors.SavedTransactionsListInteractor;
-import com.raulh82vlc.TransactionsViewer.domain.interactors_response.GetTransactionsListCallbackImpl;
-import com.raulh82vlc.TransactionsViewer.domain.exceptions.CustomException;
 import com.raulh82vlc.TransactionsViewer.domain.interactors.mappers.TransactionsListModelDataMapper;
+import com.raulh82vlc.TransactionsViewer.domain.interactors_response.GetTransactionsListCallbackImpl;
 import com.raulh82vlc.TransactionsViewer.domain.interactors_response.SavedTransactionsCallbackImpl;
 import com.raulh82vlc.TransactionsViewer.domain.models.ProductUI;
 import com.raulh82vlc.TransactionsViewer.domain.models.Transaction;
@@ -72,7 +72,8 @@ public class TransactionsPresenterImpl implements TransactionsPresenter {
     }
 
     @Override
-    public void saveProducts(List<Transaction> transactionList, Map<String, List<Transaction>> transactionsMap) throws CustomException {
+    public void saveProducts(List<Transaction> transactionList, Map<String, List<Transaction>> transactionsMap)
+            throws CustomException {
         if (view != null) {
             List<ProductUI> productUIs = transactionsListModelDataMapper.transform(transactionsMap);
             interactorSaver.executeSaveTransactions(transactionsMap, new SavedTransactionsCallbackImpl(view));

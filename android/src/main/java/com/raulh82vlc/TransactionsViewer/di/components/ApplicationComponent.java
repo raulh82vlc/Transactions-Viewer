@@ -43,8 +43,8 @@ import dagger.Component;
 @Singleton
 @Component(
         modules = {
-            ApplicationModule.class,
-            RepositoryModule.class
+                ApplicationModule.class,
+                RepositoryModule.class
         })
 public interface ApplicationComponent {
 
@@ -61,7 +61,7 @@ public interface ApplicationComponent {
     Application application();
 
     /**
-     * Background processes executor (com.raulh82vlc.BadooTest.domain.interactors use this)
+     * Background processes executor (interactors use this)
      */
     InteractorExecutor threadExecutor();
 

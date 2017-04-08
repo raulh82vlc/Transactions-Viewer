@@ -33,7 +33,7 @@ public interface JSONOperations<R, T> {
      *
      * @param path where is located the JSON file
      */
-    List<R> getRatesList(Context Context, String path) throws CustomException;
+    List<R> getRatesList(Context context, String path) throws CustomException;
 
     /**
      * Gets a the list of transactions from the JSON file

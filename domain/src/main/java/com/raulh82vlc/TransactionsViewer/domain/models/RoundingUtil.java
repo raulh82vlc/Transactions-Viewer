@@ -27,11 +27,13 @@ import java.math.RoundingMode;
 
 public final class RoundingUtil {
 
-    private RoundingUtil() {}
+    private RoundingUtil() {
+    }
 
     /**
      * Rounding functionality
-     * @param value value to round
+     *
+     * @param value       value to round
      * @param roundDigits number of digits to show on the decimals
      * @return rounded value
      */

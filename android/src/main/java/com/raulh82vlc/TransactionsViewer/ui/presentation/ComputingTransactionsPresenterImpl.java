@@ -18,8 +18,8 @@ package com.raulh82vlc.TransactionsViewer.ui.presentation;
 
 import com.raulh82vlc.TransactionsViewer.domain.exceptions.CustomException;
 import com.raulh82vlc.TransactionsViewer.domain.interactors.ComputeTransactionsInteractor;
-import com.raulh82vlc.TransactionsViewer.domain.interactors_response.GetTransactionsComputedCallbackImpl;
 import com.raulh82vlc.TransactionsViewer.domain.interactors.mappers.TransactionsRatedDataMapper;
+import com.raulh82vlc.TransactionsViewer.domain.interactors_response.GetTransactionsComputedCallbackImpl;
 
 import javax.inject.Inject;
 

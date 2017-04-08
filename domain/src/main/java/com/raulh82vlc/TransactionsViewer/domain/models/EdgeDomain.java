@@ -22,6 +22,7 @@ import java.math.BigDecimal;
  * <p>Edge from the Domain layer,
  * which is composed by two vertex, one for the source, one for the destination with its related weight
  * </p>
+ *
  * @author Raul Hernandez Lopez.
  */
 

@@ -35,7 +35,6 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
- *
  * <p>Checks the repository pattern behaviour adding rates or transactions</p>
  *
  * @author Raul Hernandez Lopez.
@@ -65,7 +64,7 @@ public class JSONRepositoryImplTest {
     }
 
     @Test
-    public void getRatesList () throws Exception {
+    public void getRatesList() throws Exception {
         rates.add(mock(Rate.class));
         rates.add(mock(Rate.class));
         assertEquals(2, repoUnderTest.getRatesList(MY_PATH).size());

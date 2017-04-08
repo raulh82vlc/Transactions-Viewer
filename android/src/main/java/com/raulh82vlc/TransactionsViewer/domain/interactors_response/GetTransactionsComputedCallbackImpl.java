@@ -29,7 +29,9 @@ import java.util.List;
  * @author Raul Hernandez Lopez.
  */
 
-public class GetTransactionsComputedCallbackImpl implements ComputeTransactionsInteractor.GetTransactionsComputedCallback {
+public class GetTransactionsComputedCallbackImpl implements
+        ComputeTransactionsInteractor.GetTransactionsComputedCallback {
+
     private final ComputingTransactionsPresenter.View mView;
     private final TransactionsRatedDataMapper transactionsRatedDataMapper;
 
