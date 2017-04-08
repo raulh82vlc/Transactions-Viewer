@@ -1,4 +1,4 @@
-# Transactions viewer
+# Transactions viewer [![Build Status](https://travis-ci.org/raulh82vlc/Transactions-Viewer.svg?branch=master)](https://travis-ci.org/raulh82vlc/Transactions-Viewer)
 Transactions viewer shows a list of products ordered alphabetically as well as its detail view whose transactions reflect their
 corresponding exchange rate to GBP.
 
@@ -47,7 +47,7 @@ info, such as the SKU identifier per product, the kind of dataset to look at, et
 - There is a small amount of Unit test cases for the most critical parts: mainly the Graph logic, then repository as well as view interaction.
 
 ### SDK support
-Support SDKs from **15** to **23**
+Support SDKs from **15** to **25**
 
 # Disclosure - Libraries used
 - [Dagger 2](http://google.github.io/dagger) for Dependency Injection
