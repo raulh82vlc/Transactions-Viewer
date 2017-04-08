@@ -5,6 +5,7 @@ notifications:
         - raul.h82@gmail.com
 env:
   matrix:
+    - ANDROID_TARGET=android-16 ANDROID_ABI=armeabi-v7a
     - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
   global:
     - ADB_INSTALL_TIMEOUT=10    #Time out to 10 mins
@@ -29,9 +30,10 @@ before_script:
 script:
   - echo "Travis branch is $TRAVIS_BRANCH"
   - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
-  - ./gradlew checkstyle build test
+  - ./gradlew checkstyle clean build test jacocoTestReport check
 before_install:
     - pip install --user codecov    #Install codecov
 after_success:
-    - codecov                       #Run codecov
+    - bash <(curl -s https://codecov.io/bash)
+
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
