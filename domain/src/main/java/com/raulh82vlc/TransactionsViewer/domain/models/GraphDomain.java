@@ -48,8 +48,9 @@ public class GraphDomain {
 
     /**
      * Adds and edge to the graph
-     * @param from from {@link VertexDomain}
-     * @param to to {@link VertexDomain}
+     *
+     * @param from   from {@link VertexDomain}
+     * @param to     to {@link VertexDomain}
      * @param weight at the weight is the currency between verteces
      */
     public void addEdge(VertexDomain from, VertexDomain to, BigDecimal weight) {
@@ -82,7 +83,7 @@ public class GraphDomain {
      * BSF (Breadth Search First) algorithm which uses a queue
      *
      * @param currencyFrom currency from where to start to look for a currency
-     * @param currencyTo currency to where we would like to achieve
+     * @param currencyTo   currency to where we would like to achieve
      * @return big precision decimal with final concurrency
      */
     public BigDecimal searchCurrency(String currencyFrom, String currencyTo) {

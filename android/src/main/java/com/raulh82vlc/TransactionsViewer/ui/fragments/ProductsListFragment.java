@@ -166,8 +166,9 @@ public class ProductsListFragment extends BaseFragment implements
                 mRatesPath = PATH_RATES_PATH2;
                 loadInfo(mTransactionsPath, mRatesPath);
                 return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     /**

@@ -28,13 +28,16 @@ allprojects {
         // Android config
         androidCompileSdkVersion = 25
         androidBuildToolsVersion = "25.0.0"
-        androidMinSdkVersion = 15
+        androidMinSdkVersion = 16
         androidTargetSdkVersion = 25
         androidApplicationId = 'com.raulh82vlc.TransactionsViewer'
         androidVersionCode = 1
         androidVersionName = '1.0'
         // Test Android config
-        testingInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
+        testingInstrumentationRunner = 'com.android.support.test:runner:0.5'
+        testingRules = 'com.android.support.test:rules:0.5'
+        testingSupportAnnotations = 'com.android.support:support-annotations:25.0.0'
+        libSupportAnnotations = 'com.android.support:support-annotations:25.0.0'
         testingJUnit = 'junit:junit:4.12'
         testingMockito = 'org.mockito:mockito-core:1.10.19'
         // Libraries
@@ -51,4 +54,8 @@ allprojects {
     repositories {
         jcenter()
     }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

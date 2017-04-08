@@ -20,10 +20,10 @@
     <item
         android:id="@+id/action_path1"
         android:title="@string/path1"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_path2"
         android:title="@string/path2"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

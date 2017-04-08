@@ -32,8 +32,7 @@ public class TransactionUI implements Parcelable {
     private String currencyCurrent;
 
     public TransactionUI(String currencyPrev, String currencyCurrent, String amounPerTransactionPrev,
-                         String amountPerTransactionCurrent)
-    {
+                         String amountPerTransactionCurrent) {
         this.currencyPrev = currencyPrev;
         this.currencyCurrent = currencyCurrent;
         this.amounPerTransactionPrev = amounPerTransactionPrev;

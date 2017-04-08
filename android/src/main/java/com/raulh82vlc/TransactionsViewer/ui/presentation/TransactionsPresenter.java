@@ -33,7 +33,8 @@ public interface TransactionsPresenter {
 
     void setView(View view);
 
-    void saveProducts(List<Transaction> transactionList, Map<String, List<Transaction>> transactionsMap) throws CustomException;
+    void saveProducts(List<Transaction> transactionList, Map<String, List<Transaction>> transactionsMap)
+            throws CustomException;
 
     void resetView();
 

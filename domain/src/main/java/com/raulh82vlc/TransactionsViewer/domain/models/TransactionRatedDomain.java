@@ -32,8 +32,7 @@ public class TransactionRatedDomain {
 
     public TransactionRatedDomain(String currencyPrev, String currencyCurrent,
                                   BigDecimal amounPerTransactionPrev,
-                                  BigDecimal amountPerTransactionCurrent)
-    {
+                                  BigDecimal amountPerTransactionCurrent) {
         this.currencyPrev = currencyPrev;
         this.currencyCurrent = currencyCurrent;
         this.amounPerTransactionPrev = amounPerTransactionPrev;

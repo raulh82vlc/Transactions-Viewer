@@ -34,7 +34,8 @@ public interface ComputingTransactionsPresenter {
 
     void resetView();
 
-    void computeRates(String skuFromProduct, String toCurrency, String pathTransactions, String pathRates) throws CustomException;
+    void computeRates(String skuFromProduct, String toCurrency, String pathTransactions, String pathRates)
+            throws CustomException;
 
     interface View {
         void errorComputingRates(String error);

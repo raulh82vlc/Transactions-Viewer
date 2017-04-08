@@ -18,11 +18,9 @@
     <string name="app_name">Transactions viewer</string>
     <string name="main_screen">Products</string>
     <string name="detail_screen">Transactions for %1$s</string>
-    <string name="file_does_not_exist_error">There was a problem when reading data</string>
     <string name="loading">loading…</string>
     <string name="no_results">No products found</string>
     <string name="product_list_empty">Product list is empty</string>
-    <string name="transaction_product">%1$d transactions</string>
     <string name="amount_transaction">%1$s %2$s</string>
     <string name="title_on_transaction_detail">Total: GBP %1$s</string>
     <string name="transaction_list_empty">Transactions list is empty</string>

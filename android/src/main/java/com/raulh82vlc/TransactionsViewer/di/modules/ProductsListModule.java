@@ -33,7 +33,7 @@ import dagger.Provides;
 
 /**
  * Module which provides all user required artifacts
- * (presenter, com.raulh82vlc.BadooTest.domain.interactors, repository, com.raulh82vlc.BadooTest.domain.datasources or com.raulh82vlc.BadooTest.domain.interactors.mappers)
+ * (presenter, interactors, repository, datasources or mappers)
  * in order to use them in a decoupled way
  *
  * @author Raul Hernandez Lopez
@@ -61,7 +61,8 @@ public class ProductsListModule {
 
     @Provides
     @ActivityScope
-    SavedTransactionsListInteractor provideSaveTransactionsListInteractor(SavedTransactionListInteractorImpl interactor) {
+    SavedTransactionsListInteractor provideSaveTransactionsListInteractor(SavedTransactionListInteractorImpl
+                                                                                  interactor) {
         return interactor;
     }
 

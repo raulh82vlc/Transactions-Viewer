@@ -42,6 +42,8 @@ import javax.inject.Inject;
 public class ComputeTransactionsInteractorImpl implements ComputeTransactionsInteractor, Interactor {
 
     private static final int ROUND_TO = 2;
+    public static final float BIG_DEC_0F = 0F;
+    public static final float BIG_DEC_1F = 1F;
     private InteractorExecutor executor;
     private MainThread mainThread;
     private GetTransactionsComputedCallback callback;
@@ -100,17 +102,20 @@ public class ComputeTransactionsInteractorImpl implements ComputeTransactionsInt
     }
 
     protected BigDecimal computeTransactionIntoRightCurrencyRate(List<Transaction> transactions,
-                                                                 String toCurrency, GraphDomain graphDomain,
-                                                                 List<TransactionRatedDomain> transactionRatedDomainList) throws CustomException {
-        BigDecimal totalAmount = new BigDecimal(0F);
+                                                             String toCurrency, GraphDomain graphDomain,
+                                                             List<TransactionRatedDomain> transactionRatedDomainList)
+            throws CustomException {
+        BigDecimal totalAmount = new BigDecimal(BIG_DEC_0F);
         for (Transaction transaction : transactions) {
-            BigDecimal currency = new BigDecimal(1F);
+            BigDecimal currency = new BigDecimal(BIG_DEC_1F);
             if (graphDomain != null) {
                 currency = graphDomain.searchCurrency(transaction.getCurrency(), toCurrency);
             }
             BigDecimal amountSpentInitially = new BigDecimal(transaction.getAmountPerTransaction());
-            TransactionRatedDomain transactionRatedDomain = new TransactionRatedDomain(transaction.getCurrency(), mToCurrency,
-                    RoundingUtil.round(amountSpentInitially, ROUND_TO), RoundingUtil.round(amountSpentInitially.multiply(currency), ROUND_TO));
+            TransactionRatedDomain transactionRatedDomain = new TransactionRatedDomain(transaction.getCurrency(),
+                    mToCurrency,
+                    RoundingUtil.round(amountSpentInitially, ROUND_TO),
+                    RoundingUtil.round(amountSpentInitially.multiply(currency), ROUND_TO));
             transactionRatedDomainList.add(transactionRatedDomain);
             totalAmount = totalAmount.add(transactionRatedDomain.getAmountPerTransactionCurrent());
         }

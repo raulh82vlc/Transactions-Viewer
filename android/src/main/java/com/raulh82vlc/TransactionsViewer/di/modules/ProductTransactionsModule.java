@@ -26,7 +26,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * <p>Module with all related presenters and com.raulh82vlc.BadooTest.domain.interactors for Product Transactions</p>
+ * <p>Module with all related presenters and interactors for Product Transactions</p>
  *
  * @author Raul Hernandez Lopez
  */
@@ -40,7 +40,8 @@ public class ProductTransactionsModule {
 
     @Provides
     @ActivityScope
-    ComputeTransactionsInteractor provideComputeTransactionsComputedInteractor(ComputeTransactionsInteractorImpl interactor) {
+    ComputeTransactionsInteractor provideComputeTransactionsComputedInteractor(ComputeTransactionsInteractorImpl
+                                                                                       interactor) {
         return interactor;
     }
 }

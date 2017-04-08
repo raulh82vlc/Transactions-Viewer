@@ -1,4 +1,6 @@
-# Transactions viewer
+# Transactions viewer [![Build Status](https://travis-ci.org/raulh82vlc/Transactions-Viewer.svg?branch=master)](https://travis-ci.org/raulh82vlc/Transactions-Viewer)[
+![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
+[![codecov](https://codecov.io/gh/raulh82vlc/Transactions-Viewer/branch/master/graph/badge.svg)](https://codecov.io/gh/raulh82vlc/Transactions-Viewer)
 Transactions viewer shows a list of products ordered alphabetically as well as its detail view whose transactions reflect their
 corresponding exchange rate to GBP.
 
@@ -47,7 +49,7 @@ info, such as the SKU identifier per product, the kind of dataset to look at, et
 - There is a small amount of Unit test cases for the most critical parts: mainly the Graph logic, then repository as well as view interaction.
 
 ### SDK support
-Support SDKs from **15** to **23**
+Support SDKs from **16** to **25**
 
 # Disclosure - Libraries used
 - [Dagger 2](http://google.github.io/dagger) for Dependency Injection

@@ -15,7 +15,9 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
+
 
 android {
     compileSdkVersion parent.ext.androidCompileSdkVersion
@@ -27,10 +29,15 @@ android {
         targetSdkVersion parent.ext.androidTargetSdkVersion
         versionCode parent.ext.androidVersionCode
         versionName parent.ext.androidVersionName
-//        testIntrumentationRunner parent.ext.testingInstrumentationRunner
     }
+
     testOptions {
         unitTests.returnDefaultValues = true
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -38,6 +45,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -52,6 +64,7 @@ android {
 dependencies {
     compile project(':domain')
     compile parent.ext.libButterknife
+    compile parent.ext.libSupportAnnotations
     compile parent.ext.libAppCompat
     compile parent.ext.libDesignCompat
     compile parent.ext.libRecyclerView
@@ -60,8 +73,10 @@ dependencies {
     compile parent.ext.libDagger
     testCompile parent.ext.testingMockito
     testCompile parent.ext.testingJUnit
+    androidTestCompile parent.ext.testingInstrumentationRunner
+    androidTestCompile parent.ext.testingRules
+    androidTestCompile parent.ext.testingSupportAnnotations
 }
-
 
 task checkstyle(type: Checkstyle) {
     configFile file('../config/checkstyle/checkstyle.xml')
@@ -70,5 +85,23 @@ task checkstyle(type: Checkstyle) {
     exclude '**/gen/**'
 
     classpath = files()
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec"
+    ])
 }
 

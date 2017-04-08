@@ -88,7 +88,7 @@ public class JSONOperationsImpl implements JSONOperations<Rate, Transaction> {
             return Collections.emptyList();
         } else {
             Type listType = new TypeToken<ArrayList<Transaction>>()
-            {}.getType();
+            { }.getType();
             return mGson.fromJson(json, listType);
         }
     }
@@ -119,7 +119,7 @@ public class JSONOperationsImpl implements JSONOperations<Rate, Transaction> {
 
         try {
             appendLinesFromJSON(sb, reader);
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new IOException(e.getMessage());
         } finally {
             reader.close();

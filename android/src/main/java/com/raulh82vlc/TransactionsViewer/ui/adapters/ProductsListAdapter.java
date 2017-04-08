@@ -68,9 +68,15 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ViewHolder> {
     public void onBindViewHolder(final ViewHolder productViewHolder, int position) {
         final ProductUI productUI = mProductUIs.get(position);
         productViewHolder.mTitle.setText(productUI.getSku());
-        final String transactions = productViewHolder.itemView.getContext().getString(R.string.transaction_product, productUI.getTransactions().size());
+        final String transactions = setTransactionsTextFormat(productViewHolder, productUI);
         productViewHolder.mSubtitle.setText(transactions);
         productViewHolder.itemView.setTag(productUI);
+    }
+
+    private String setTransactionsTextFormat(final ViewHolder productViewHolder, final ProductUI productUI) {
+        return productViewHolder
+                .itemView.getContext().getResources()
+                .getQuantityString(R.plurals.transactions_per_product, productUI.getTransactions().size());
     }
 
     @Override
