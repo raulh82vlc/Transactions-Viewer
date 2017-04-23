@@ -38,7 +38,7 @@ captures/
 # Intellij
 **.iml
 android/**.iml
-com.raulh82vlc.BadooTest.domain/**.iml
+domain/**.iml
 
 # Keystore files
 *.jks
@@ -95,4 +95,4 @@ gradle-app.setting
 .gradletasknamecache
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-# gradle/wrapper/gradle-wrapper.properties
+gradle/wrapper/gradle-wrapper.*
